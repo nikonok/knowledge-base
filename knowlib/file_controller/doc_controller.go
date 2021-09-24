@@ -65,10 +65,10 @@ func (fc *fileDocController) GetDoc(id uint64) (*knowlib.Doc, error) {
 	}, nil
 }
 
-func (fc *fileDocController) UpdateDoc(id uint64, doc knowlib.Doc) error {
-	log.Info("Updating file with id = ", id)
+func (fc *fileDocController) UpdateDoc(doc knowlib.Doc) error {
+	log.Info("Updating file with id = ", doc.ID)
 
-	err := ioutil.WriteFile(fc.getFilePath(id), []byte(doc.Body), 0644)
+	err := ioutil.WriteFile(fc.getFilePath(doc.ID), []byte(doc.Body), 0644)
 	if err != nil {
 		log.Error(err)
 		return knowerrors.ErrCannotUpdateFile
@@ -76,7 +76,7 @@ func (fc *fileDocController) UpdateDoc(id uint64, doc knowlib.Doc) error {
 	return nil
 }
 
-func (fc *fileDocController) DeleteDoc(id uint64, doc knowlib.Doc) error {
+func (fc *fileDocController) DeleteDoc(id uint64) error {
 	log.Info("Deleting file with id = ", id)
 
 	err := os.Remove(fc.getFilePath(id))
