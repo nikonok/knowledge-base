@@ -1,0 +1,8 @@
+vscode/
+storage/
+
+# dirs created by tests
+knowlib/file_controller/test_storage/*
+
+# tmp
+templates/
